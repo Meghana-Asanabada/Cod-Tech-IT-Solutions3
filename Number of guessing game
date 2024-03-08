@@ -1,0 +1,53 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class NumberGuessingGame {
+    public static void main(String[] args) {
+        // Create Scanner and Random objects for user input and generating random numbers
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        // Define the range of numbers for the guessing game
+        int lowerBound = 1;
+        int upperBound = 100;
+
+        // Generate a random target number within the specified range
+        int targetNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
+
+        // Define the maximum number of attempts allowed
+        int maxAttempts = 10;
+        int attempts = 0;
+        int guess;
+
+        // Display welcome message and instructions to the user
+        System.out.println("Welcome to the Number Guessing Game!");
+        System.out.println("I have selected a number between 1 and 100. Can you guess it?");
+
+        // Main game loop
+        while (attempts < maxAttempts) {
+            // Prompt the user to enter their guess
+            System.out.print("Enter your guess: ");
+            guess = scanner.nextInt();
+            attempts++; // Increment the number of attempts
+
+            // Check if the guess is too low, too high, or correct
+            if (guess < targetNumber) {
+                System.out.println("Too low! Try again.");
+            } else if (guess > targetNumber) {
+                System.out.println("Too high! Try again.");
+            } else {
+                // If the guess is correct, congratulate the user and end the game
+                System.out.println("Congratulations! You guessed the number " + targetNumber + " in " + attempts + " attempts.");
+                break;
+            }
+        }
+
+        // If the maximum number of attempts is reached without guessing the correct number, end the game
+        if (attempts == maxAttempts) {
+            System.out.println("Sorry! You've reached the maximum number of attempts. The correct number was " + targetNumber + ".");
+        }
+
+        // Close the Scanner object to release resources
+        scanner.close();
+    }
+}
